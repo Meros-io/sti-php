@@ -1,9 +1,9 @@
-FROM openshift/base-rhel7
+FROM deploydock/base-rhel7
 
 # This image provides an Apache+PHP environment for running PHP
 # applications.
 
-MAINTAINER SoftwareCollections.org <sclorg@redhat.com>
+MAINTAINER Eric Sites <eric@meros.io>
 
 EXPOSE 8080
 
@@ -12,12 +12,12 @@ ENV PHP_VERSION=5.5 \
 
 LABEL io.k8s.description="Platform for building and running PHP 5.5 applications" \
       io.k8s.display-name="Apache 2.4 with PHP 5.5" \
-      io.openshift.expose-services="8080:http" \
-      io.openshift.tags="builder,php,php55"
+      io.deploydock.expose-services="8080:http" \
+      io.deploydock.tags="builder,php,php55"
 
 # Labels consumed by Red Hat build service
-LABEL BZComponent="openshift-sti-php-docker" \
-      Name="openshift3/php-55-rhel7" \
+LABEL BZComponent="deploydock-sti-php-docker" \
+      Name="deploydock/php-55-rhel7" \
       Version="5.5" \
       Release="1" \
       Architecture="x86_64"
@@ -39,7 +39,7 @@ COPY ./s2i/bin/ /usr/local/sti
 COPY ./contrib/ /opt/app-root
 
 # In order to drop the root user, we have to make some directories world
-# writeable as OpenShift default security model is to run the container under
+# writeable as DeployDock default security model is to run the container under
 # random UID.
 RUN sed -i -f /opt/app-root/etc/httpdconf.sed /opt/rh/httpd24/root/etc/httpd/conf/httpd.conf && \
     sed -i '/php_value session.save_path/d' /opt/rh/httpd24/root/etc/httpd/conf.d/php55-php.conf && \

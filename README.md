@@ -1,9 +1,9 @@
-PHP for OpenShift - Docker images
+PHP for DeployDock - Docker images
 ========================================
 
 This repository contains the source for building various versions of
 the PHP application as a reproducible Docker image using
-[source-to-image](https://github.com/openshift/source-to-image).
+[source-to-image](https://github.com/Meros-io/source-to-image).
 Users can choose between RHEL and CentOS based builder images.
 The resulting image can be run using [Docker](http://docker.io).
 
@@ -30,21 +30,21 @@ To build a PHP image, choose either the CentOS or RHEL based image:
     subscribed RHEL machine.
 
     ```
-    $ git clone https://github.com/openshift/sti-php.git
+    $ git clone https://github.com/Meros-io/sti-php.git
     $ cd sti-php
     $ make build TARGET=rhel7 VERSION=5.5
     ```
 
 *  **CentOS based image**
     ```
-    $ git clone https://github.com/openshift/sti-php.git
+    $ git clone https://github.com/Meros-io/sti-php.git
     $ cd sti-php
     $ make build VERSION=5.5
     ```
 
 Alternatively, you can pull the CentOS image from Docker Hub via:
 
-    $ docker pull openshift/php-55-centos7
+    $ docker pull deploydock/php-55-centos7
 
 **Notice: By omitting the `VERSION` parameter, the build/test action will be performed
 on all the supported versions of PHP.**
@@ -52,19 +52,19 @@ on all the supported versions of PHP.**
 
 Usage
 ---------------------
-To build a simple [php-test-app](https://github.com/openshift/sti-php/tree/master/5.5/test/test-app) application
-using standalone [S2I](https://github.com/openshift/source-to-image) and then run the
+To build a simple [php-test-app](https://github.com/Meros-io/sti-php/tree/master/5.5/test/test-app) application
+using standalone [S2I](https://github.com/Meros-io/source-to-image) and then run the
 resulting image with [Docker](http://docker.io) execute:
 
 *  **For RHEL based image**
     ```
-    $ s2i build https://github.com/openshift/sti-php.git --context-dir=5.5/test/test-app openshift/php-55-rhel7 php-test-app
+    $ s2i build https://github.com/Meros-io/sti-php.git --context-dir=5.5/test/test-app deploydock/php-55-rhel7 php-test-app
     $ docker run -p 8080:8080 php-test-app
     ```
 
 *  **For CentOS based image**
     ```
-    $ s2i build https://github.com/openshift/sti-php.git --context-dir=5.5/test/test-app openshift/php-55-centos7 php-test-app
+    $ s2i build https://github.com/Meros-io/sti-php.git --context-dir=5.5/test/test-app deploydock/php-55-centos7 php-test-app
     $ docker run -p 8080:8080 php-test-app
     ```
 
@@ -76,7 +76,7 @@ $ curl 127.0.0.1:8080
 
 Test
 ---------------------
-This repository also provides a [S2I](https://github.com/openshift/source-to-image) test framework,
+This repository also provides a [S2I](https://github.com/Meros-io/source-to-image) test framework,
 which launches tests to check functionality of a simple PHP application built on top of the sti-php image.
 
 Users can choose between testing a PHP test application based on a RHEL or CentOS image.
@@ -120,7 +120,7 @@ Repository organization
 
     * **`s2i/bin/`**
 
-        This folder contains scripts that are run by [S2I](https://github.com/openshift/source-to-image):
+        This folder contains scripts that are run by [S2I](https://github.com/Meros-io/source-to-image):
 
         *   **assemble**
 
@@ -139,16 +139,16 @@ Repository organization
 
     * **`test/`**
 
-        This folder contains the [S2I](https://github.com/openshift/source-to-image)
+        This folder contains the [S2I](https://github.com/Meros-io/source-to-image)
         test framework with a sample PHP app.
 
         * **`test-app/`**
 
-            A simple PHP app used for testing purposes by the [S2I](https://github.com/openshift/source-to-image) test framework.
+            A simple PHP app used for testing purposes by the [S2I](https://github.com/Meros-io/source-to-image) test framework.
 
         * **run**
 
-            Script that runs the [S2I](https://github.com/openshift/source-to-image) test framework.
+            Script that runs the [S2I](https://github.com/Meros-io/source-to-image) test framework.
 
 * **`hack/`**
 
@@ -156,13 +156,13 @@ Repository organization
 
 Image name structure
 ------------------------
-##### Structure: openshift/1-2-3
+##### Structure: deploydock/1-2-3
 
 1. Platform name (lowercase) - php
 2. Platform version(without dots) - 55
 3. Base builder image - centos7/rhel7
 
-Examples: `openshift/php-55-centos7`, `openshift/php-55-rhel7`
+Examples: `deploydock/php-55-centos7`, `deploydock/php-55-rhel7`
 
 Environment variables
 ---------------------
